@@ -12,31 +12,37 @@ When you click the **Knit** button a document will be generated that includes bo
 library(knitr)
 Sys.setlocale("LC_ALL", "English_United States.1252")
 opts_chunk$set(echo = TRUE)
-
+```
 ##Read the data
+```{r}
 setwd("C:/Users/gahee/Documents/2016_Unist/2016_2nd/R/week14")
   rawdata <- read.csv("activity.csv")
 dat=aggregate(steps ~date, data=rawdata, sum, na.rm=TRUE)
 
+
 ##histogram 1
 hist(dat$steps, breaks=20, main="Total Steps per Dat", xlab="Steps", ylab = "Frequency")
+```
 
 ##what is mean total number of steps taken per day
+```{r}
 steps_mean = mean(rawdata$steps, na.rm=TRUE)
 steps_median = median(rawdata$steps, na.rm = TRUE)
 
 print(paste("The mean steps per day is: ", steps_mean))
 print(paste("The median steps per day is: ", steps_median))
 
-
+```
 ##what is the average daily activity pattern
+```{r}
 stepsdat = aggregate(steps ~ interval, data=rawdata,mean, na.rm=TRUE)
 plot(stepsdat$interval, stepsdat$steps, type="l", main = "Average steps per Five minute interval", xlab="Interval No.", ylab="steps")
 
 maxsteps = max(stepsdat$steps)
 print(paste("The maximum number of steps in a five minute interval was: ", maxsteps))
-
+```
 ##Imputing missing values
+```{r}
 missingdat = sum(is.na(rawdata$steps))
 print(paste("There are", missingdat, "missing data points."))
 
@@ -50,8 +56,10 @@ bsteps_median = median(betterdat$steps)
 print(paste("The mean is: ", bsteps_mean))
 print(paste("The median is: ", bsteps_median))
 
+```
 
 ##are there differences in activity patterns between weekdays and weekends
+```{r}
 betterdat$date = as.Date(betterdat$date)
 betterdat$dayname = weekdays(betterdat$date)
 betterdat$weekend = as.factor(ifelse(betterdat$dayname == "Saturday" | 

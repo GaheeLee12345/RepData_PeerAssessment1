@@ -31,7 +31,7 @@ dat=aggregate(steps ~date, data=rawdata, sum, na.rm=TRUE)
 hist(dat$steps, breaks=20, main="Total Steps per Dat", xlab="Steps", ylab = "Frequency")
 ```
 
-![histogram1](PA1_template_files/figure-html/histogram1-1.png)<!-- -->
+![histogram1](PA1_template_files/figure/histogram1-1.png)<!-- -->
 
 ##what is mean total number of steps taken per day
 
@@ -60,7 +60,7 @@ stepsdat = aggregate(steps ~ interval, data=rawdata,mean, na.rm=TRUE)
 plot(stepsdat$interval, stepsdat$steps, type="l", main = "Average steps per Five minute interval", xlab="Interval No.", ylab="steps")
 ```
 
-![average](PA1_template_files/figure-html/average-1.png)<!-- -->
+![average](PA1_template_files/figure/average-1.png)<!-- -->
 
 ```r
 maxsteps = max(stepsdat$steps)
@@ -91,7 +91,7 @@ betterdataday = aggregate(steps ~ date, data=betterdat, sum, na.rm=TRUE)
 hist(betterdataday$steps, breaks=20, main="Total steps per Day Adjusted Data", xlab="Steps", ylab="Frequency")
 ```
 
-![missing](PA1_template_files/figure-html/missing-1.png)<!-- -->
+![missing](PA1_template_files/figure/missing-1.png)<!-- -->
 
 ```r
 bsteps_mean = mean(betterdat$steps)
@@ -126,7 +126,7 @@ plotdat = aggregate(steps ~ interval + weekend, betterdat, mean)
 xyplot(steps~interval | factor(weekend), data=plotdat, aspect = 1/3, type = "l")
 ```
 
-![pattern](PA1_template_files/figure-html/pattern-1.png)<!-- -->
+![pattern](PA1_template_files/figure/pattern-1.png)<!-- -->
 knit2html(input = "PA1_template.Rmd", output="PA1_template.md",force_v1 = TRUE)
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

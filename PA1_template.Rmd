@@ -21,7 +21,7 @@ dat=aggregate(steps ~date, data=rawdata, sum, na.rm=TRUE)
 ```
 
 ##histogram
-```{r, echo=FALSE}
+```{r, echo=TRUE}
 hist(dat$steps, breaks=20, main="Total Steps per Dat", xlab="Steps", ylab = "Frequency")
 ```
 
@@ -50,7 +50,7 @@ print(paste("There are", missingdat, "missing data points."))
 betterdat = rawdata
 betterdat$steps[is.na(betterdat$steps)] = median(rawdata$steps, na.rm = "TRUE")
 betterdataday = aggregate(steps ~ date, data=betterdat, sum, na.rm=TRUE)
-```{r, echo=FALSE}
+```{r, echo=TRUE}
 hist(betterdataday$steps, breaks=20, main="Total steps per Day Adjusted Data", xlab="Steps", ylab="Frequency")
 ```
 ```{r}
@@ -69,7 +69,7 @@ betterdat$weekend = as.factor(ifelse(betterdat$dayname == "Saturday" |
                                        betterdat$dayname == "Sunday", "weekend", "weekday"))
 library(lattice)
 ```
-```{r, echo=FALSE}
+```{r, echo=TRUE}
 plotdat = aggregate(steps ~ interval + weekend, betterdat, mean)
 xyplot(steps~interval | factor(weekend), data=plotdat, aspect = 1/3, type = "l")
 

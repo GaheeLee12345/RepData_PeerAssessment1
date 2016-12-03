@@ -21,7 +21,7 @@ dat=aggregate(steps ~date, data=rawdata, sum, na.rm=TRUE)
 ```
 
 ##histogram
-```{r, echo=TRUE}
+```{r histogram1, fig.height=4}
 hist(dat$steps, breaks=20, main="Total Steps per Dat", xlab="Steps", ylab = "Frequency")
 ```
 
@@ -35,7 +35,7 @@ print(paste("The median steps per day is: ", steps_median))
 
 ```
 ##what is the average daily activity pattern
-```{r}
+```{r average, fig.height=4}
 stepsdat = aggregate(steps ~ interval, data=rawdata,mean, na.rm=TRUE)
 plot(stepsdat$interval, stepsdat$steps, type="l", main = "Average steps per Five minute interval", xlab="Interval No.", ylab="steps")
 
@@ -50,7 +50,7 @@ print(paste("There are", missingdat, "missing data points."))
 betterdat = rawdata
 betterdat$steps[is.na(betterdat$steps)] = median(rawdata$steps, na.rm = "TRUE")
 betterdataday = aggregate(steps ~ date, data=betterdat, sum, na.rm=TRUE)
-```{r, echo=TRUE}
+```{r missing, fig.height=4}
 hist(betterdataday$steps, breaks=20, main="Total steps per Day Adjusted Data", xlab="Steps", ylab="Frequency")
 ```
 ```{r}
@@ -69,7 +69,7 @@ betterdat$weekend = as.factor(ifelse(betterdat$dayname == "Saturday" |
                                        betterdat$dayname == "Sunday", "weekend", "weekday"))
 library(lattice)
 ```
-```{r, echo=TRUE}
+```{r pattern, fig.height=4}
 plotdat = aggregate(steps ~ interval + weekend, betterdat, mean)
 xyplot(steps~interval | factor(weekend), data=plotdat, aspect = 1/3, type = "l")
 
